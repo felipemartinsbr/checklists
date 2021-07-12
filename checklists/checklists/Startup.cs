@@ -29,9 +29,9 @@ namespace checklists
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 22));
-            services.AddDbContext<DatabaseContext>(options => options.UseMySql(Configuration.GetConnectionString("ChecklistsDb"), serverVersion)
+            
+            //var serverVersion = new MySqlServerVersion(new Version(8, 0, 22));
+            services.AddDbContext<DatabaseContext>(options => options.UseMySql(Configuration.GetConnectionString("ChecklistsDb"))
                 );
             
             // Adicionando serviços para camada Model

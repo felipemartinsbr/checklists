@@ -6,21 +6,36 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using checklists.Models;
+using checklists.Models.CheckListItems;
+using checklists.Models.CheckLists;
+using checklists.ViewModels.Home;
 
 namespace checklists.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CheckListsService _checkListsService;
+        private readonly CheckListItemsService _checkListItemsService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CheckListsService checkListsService, CheckListItemsService checkListItemsService)
         {
             _logger = logger;
+            _checkListsService = checkListsService;
+            _checkListItemsService = checkListItemsService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new IndexViewModel()
+            {
+                ObterItemsRealizados = _checkListItemsService.ObterItemsRealizados(),
+                ObterItemsNaoRealizados = _checkListItemsService.ObterItemsNaoRealizados(),
+                ObterQntdItems = _checkListItemsService.ObterQntdItems(),
+                ObterQntdCheckList = _checkListsService.ObterQntdCheckList()
+            };
+            
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

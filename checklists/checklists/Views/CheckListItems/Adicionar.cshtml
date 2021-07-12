@@ -1,0 +1,76 @@
+@model checklists.ViewModels.CheckListItems.AdicionarViewModel
+@{
+    ViewData["Title"] = "Adicionar item na CheckList";
+}
+
+<div class="mb-2">
+    <a href="/CheckListItems" class="btn btn-secondary btn-sm">Voltar para Listagem</a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Adicionar Itens</h2>
+    </div>
+    <div class="card-body">
+        @if (@Model.msgErros != null)
+        {
+            <u class="alert alert-danger">
+                @foreach (var msgErro in @Model.msgErros)
+                {
+                    <li>@msgErro</li>
+                }
+            </u>
+        }
+        <form action="/Adicionar" method="post">
+            <div class="form-group">
+                <label for="titulo">Título: </label>
+                <input type="text" name="titulo" id="titulo">
+            </div>
+            
+            <div class="form-group">
+                <label for="idchecklist">CheckList:</label>
+                <select id="idchecklist" name="idchecklist">
+                    @if (@Model.CheckLists != null)
+                    {
+                        @foreach (var checkList in @Model.CheckLists)
+                        {
+                            <option value="@checkList.Id">@checkList.Nome</option>
+                        }
+                    }
+                    
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="subitem">SubItems: </label>
+                <select id="idchecklistItem" name="idchecklistItem">
+                    <option value="0">Selecione</option>
+                    @if (@Model.Items != null)
+                    {
+                        @foreach (var subItem in @Model.Items)
+                        {
+                            <option value="@subItem.Id">@subItem.Titulo</option>
+                        }
+                    }
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="realizado">Realizado ?</label>
+                <select id="realizado" name="realizado">
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="dataRealizado">Data da Realização: </label>
+                <input type="date" class="form-control" id="dataRealizado" name="dataRealizado">
+            </div>
+            
+            <div class="form-group">
+                <input name="adicionar" class="btn btn-primary" type="submit" value="Confirmar">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model checklists.ViewModels.Home.IndexViewModel
+@{
+    ViewData["Title"] = "Home Page :: Relatórios";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Análise dos Dados</h1>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Números de CheckLists e Items</h2>
+        </div>
+        <div class="card-body">
+            
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Total de Checklists criados</th>
+                    <th>Total de Itens criados</th>
+                    <th>Total de Itens <strong>Realizados</strong></th>
+                    <th>Total de Itens <strong> Não Realizados</strong></th>
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>@Model.ObterQntdCheckList</td>
+                    <td>@Model.ObterQntdItems</td>
+                    <td>@Model.ObterItemsRealizados</td>
+                    <td>@Model.ObterItemsNaoRealizados</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

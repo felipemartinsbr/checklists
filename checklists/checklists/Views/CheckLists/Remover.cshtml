@@ -1,0 +1,44 @@
+@model checklists.ViewModels.CheckLists.RemoverViewModel
+
+@{
+    ViewData["Title"] = "Remover Checklist " + Model.Id;
+}
+
+<div class="mb-2">
+    <a class="btn btn-secondary btn-sm" href="/CheckList"> Voltar para listagem </a>
+</div>
+
+<div class="card">
+<div class="card-header">
+    <h2 class="card-title"> Remover Item <strong>#@Model.Id</strong></h2>
+</div>
+
+<div class="card-body">
+    @if (@Model.msgErros != null){
+        <ul class="alert alert-danger">
+            @foreach (var msgErro in @Model.msgErros){
+                <li>@msgErro</li>
+            }
+        </ul>
+    }
+    
+    <form action="Remover/@Model.Id" method="post">
+        <div class="form-group">
+            <p>Dados para remover o item</p>
+                
+            <ul>
+                <li>
+                    <strong>Nome: @Model.Nome</strong>
+                </li>
+            </ul>
+            <p> <strong> Atenção:</strong> Essa operação não pode ser desfeita! </p>
+        
+        </div>
+        <div class="form-group">
+            <input name="confirmar" class="btn btn-primary" type="submit" value="Confirmar Exclusão"> 
+        </div>
+        
+    </form>
+
+            </div>
+</div>

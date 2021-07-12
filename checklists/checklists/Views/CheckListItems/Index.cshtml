@@ -1,0 +1,58 @@
+@using checklists.ViewModels.CheckListItems
+@model checklists.ViewModels.CheckListItems.IndexViewModel
+@{
+    ViewData["Title"] = "Listagem de Itens";
+
+}
+
+<div class="mb-2">
+    <a class="btn btn-primary btn-sm" href="/CheckListItems/Adicionar">Adicionar</a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title"> Listagem de Itens </h2>
+    </div>
+    <div class="card-body">
+        @if (@Model.MensagemSucesso != null)
+                {
+                    <p class="alert alert-success">@Model.MensagemSucesso </p>
+                }
+                @if (@Model.MensagemSucesso != null)
+                {
+                    <p class="alert alert-success">@Model.MensagemErro </p>
+                }
+        
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Realizado?</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">SubItem de</th>
+                        <th class="text-center">Ações</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (CheckListItems items in @Model.CheckListItems)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <p>@items.Realizado</p>
+                                <p>@items.DataRealizado</p>
+                            </td>
+                            <td>@items.Titulo</td>
+                            <td>@items.Subitem</td>
+
+                            <td class="text-center">
+                                <a href="/CheckListItems/Editar/@items.Id" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="/CheckListItems/Remover/@items.Id" class="btn btn-secondary btn-sm">Remover</a>
+                                
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                
+                </table>
+    </div>
+</div>

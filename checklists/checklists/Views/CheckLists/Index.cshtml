@@ -1,0 +1,51 @@
+@using checklists.ViewModels.CheckLists
+@model checklists.ViewModels.CheckLists.IndexViewModel
+@{
+    ViewData["Title"] = "Listagem de CheckLists";
+}
+
+<div class="mb-2">
+    <a href="/CheckLists/Adicionar" class="btn btn primary btn-sm">Criar nova Checklist</a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Listagem de CheckLists</h2>
+    </div>
+    <div class="card-body">
+        @if (@Model.MensagemSucesso != null)
+        {
+            <p class="alert alert-success">@Model.MensagemSucesso</p> 
+        }
+        @if (@Model.MensagemErro != null)
+        {
+            <p class="alert alert-danger">@Model.MensagemErro</p> 
+        }
+        
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th rowspan="2">Id</th>
+                <th rowspan="2">Nome</th>
+                <th class="text-center" rowspan="2">Ações</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+            @foreach (CheckList checkLists in @Model.CheckLists)
+            {
+                <tr>
+                    <td>@checkLists.Id</td>
+                    <td>@checkLists.Nome</td>
+                    <td class="text-center">
+                        <a href="/CheckListItems/Index" class="btn btn-primary btn-sm">Ver</a>
+                        <a href="/CheckLists/Editar/@checkLists.Id" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="/CheckLists/Remover/@checkLists.Id" class="btn btn-secondary btn-sm">Remover</a>
+                    </td>
+                </tr>
+            }
+            
+            </tbody>
+        </table>
+    </div>
+</div>
